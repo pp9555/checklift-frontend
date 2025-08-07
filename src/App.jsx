@@ -15,11 +15,12 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Pricing from "./pages/pricing";
+
 
 import AboutPage from "./pages/AboutPage";
 import FeaturesPage from "./pages/FeaturesPage";
 import ProductPage from "./pages/ProductPage";
+import Pricing from "./pages/Pricing";
 
 export default function App() {
   return (
