@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Rocket } from "lucide-react";
-import Pricing from "@/pages/pricing";
+
 import { Link } from "react-router-dom";
 
 const UpgradeToPro = () => {
