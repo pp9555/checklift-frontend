@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import axios from 'axios';
 
+
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function PlanBanner() {
   const [plan, setPlan] = useState(null);
   const { getToken } = useAuth();
@@ -9,7 +12,7 @@ export default function PlanBanner() {
   useEffect(() => {
     const fetchPlan = async () => {
       const token = await getToken();
-      const res = await axios.get('http://localhost:4000/api/user/plan', {
+      const res = await axios.get(`${API_URL}/api/user/plan`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

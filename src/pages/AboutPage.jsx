@@ -1,5 +1,3 @@
-// pages/about.tsx
-
 import Header from "@/components/Header";
 import { motion } from "framer-motion";
 

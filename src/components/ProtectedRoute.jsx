@@ -1,4 +1,3 @@
-// components/ProtectedRoute.jsx
 import { useAuth, RedirectToSignIn } from "@clerk/clerk-react";
 
 export default function ProtectedRoute({ children }) {

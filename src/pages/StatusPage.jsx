@@ -1,4 +1,3 @@
-// pages/StatusPage.jsx
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -8,7 +7,7 @@ export default function StatusPage() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/api/status/${siteId}`)
+    axios.get(`${API_URL}/api/status/${siteId}`)
       .then(res => setData(res.data))
       .catch(console.error);
   }, [siteId]);

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom'; // ✅ For Vite + React apps
 import { useTheme } from 'next-themes';
-import AboutPage from '@/pages/AboutPage';
+
 
 
 const navItems = [

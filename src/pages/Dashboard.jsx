@@ -1,77 +1,11 @@
-// import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-// import LogList from '@/components/LogList';
-// import { UserButton } from '@clerk/clerk-react';
-
-
-
-
-// // import SenderForm from './components/senderForm'
-
-
-// function Dashboard() {
-
-//   const [urls, setUrls] = useState([]);
-//   const [input, setInput] = useState('');
-
-//   useEffect(() => {
-//     axios.get('http://localhost:4000/api/websites').then(res => setUrls(res.data));
-//   }, []);
-
-//   const addUrl = async () => {
-//     const res = await axios.post('http://localhost:4000/api/websites', { url: input });
-//     setUrls([...urls, res.data]);
-//     setInput('');
-//   };
-
-//   const deleteUrl = async (id) => {
-//     await axios.delete(`http://localhost:4000/api/websites/${id}`);
-//     setUrls(urls.filter(url => url._id !== id));
-//   };
-
-//   return (
-  
-//     //   <div className="flex min-h-svh flex-col items-center justify-center">
-//     //     <SenderForm
-//     //       cardTitle="Sender Form"
-//     //       cardDescription="This is a description of the sender form."
-//     //       cardAction={<Button>Submit</Button>}
-//     //       cardContent="Here you can fill out your details."
-//     //       cardFooter="Footer content goes here." 
-//     //     />
-//     //   {/* <Button>Click me</Button> */}
-//     // </div>
-    
-
-//     <div className="p-4 max-w-xl mx-auto">
-//       <h1 className="text-2xl font-bold mb-4">Checklift Dashboard</h1>
-//       <UserButton afterSignOutUrl='/sign-in' />
-//       <input className="border p-2 w-full mb-2" value={input} onChange={e => setInput(e.target.value)} placeholder="https://example.com" />
-//       <button className="bg-blue-500 text-white px-4 py-2" onClick={addUrl}>Add URL</button>
-//       <ul className="mt-4">
-//         {urls.map(site => (
-//           <li key={site._id} className="flex justify-between border-b py-2">
-//             <span>{site.url}</span>
-//             <button onClick={() => deleteUrl(site._id)} className="text-red-600">Delete</button>
-//           </li>
-//         ))}
-//       </ul>
-//       <LogList />
-//     </div>
-
-//   )
-// }
-
-// export default Dashboard;
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import LogList from '@/components/LogList';
 import { useAuth, UserButton } from '@clerk/clerk-react';
-import PlanSelector from '@/components/PlanSelector';
-import PlanBanner from '@/components/PlanBanner';
 import UpgradeToPro from '@/components/UpgradeToPro';
 import { motion } from 'framer-motion';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Dashboard() {
   const { getToken } = useAuth();
@@ -82,7 +16,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchUrls = async () => {
       const token = await getToken();
-      const res = await axios.get('http://localhost:4000/api/websites', {
+      const res = await axios.get(`${API_URL}/api/websites`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -95,7 +29,7 @@ function Dashboard() {
 
   const addUrl = async () => {
     const token = await getToken();
-    const res = await axios.post('http://localhost:4000/api/websites', 
+    const res = await axios.post(`${API_URL}/api/websites`, 
       { url: input },
       
       {
@@ -111,7 +45,7 @@ function Dashboard() {
 
   const deleteUrl = async (id) => {
     const token = await getToken();
-    await axios.delete(`http://localhost:4000/api/websites/${id}`, {
+    await axios.delete(`${API_URL}/api/websites/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -120,128 +54,7 @@ function Dashboard() {
   };
 
   return (
-//     <div className="p-4 max-w-xl mx-auto">
-//       {/* <h1 className="text-2xl font-bold mb-4">Checklift Dashboard</h1>
-//       <UserButton afterSignOutUrl="/sign-in" />
-//       <PlanSelector />
-//       <PlanBanner /> */}
 
-// {/* Header */}
-//   <div className="flex flex-col sm:flex-row items-center justify-between gap-4 rounded-xl border bg-background p-4 shadow-sm">
-//     <div>
-//       <h1 className="text-2xl font-bold tracking-tight">Checklift Dashboard</h1>
-//       <p className="text-muted-foreground text-sm">
-//         Monitor your URLs and alerts in real time.
-//       </p>
-//     </div>
-//     <div className="flex items-center gap-4">
-//       <UpgradeToPro />
-//       <UserButton afterSignOutUrl="/sign-in" />
-//     </div>
-//   </div>
-
-
-//       <input
-//         className="border p-2 w-full mb-2"
-//         value={input}
-//         onChange={e => setInput(e.target.value)}
-//         placeholder="https://example.com"
-//       />
-//       <button
-//         className="bg-blue-500 text-white px-4 py-2"
-//         onClick={addUrl}
-//          disabled={ !input.trim()}
-//       >
-//         Add URL
-//       </button>
-//       <ul className="mt-4">
-//         {urls.map(site => (
-//           <li key={site._id} className="flex justify-between border-b py-2">
-//             <span>{site.url}</span>
-//             <button onClick={() => deleteUrl(site._id)} className="text-red-600">
-//               Delete
-//             </button>
-//           </li>
-//         ))}
-//       </ul>
-//       <LogList />
-//     </div>
-
-
-// <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-purple-100">
-//       {/* Navbar at the top — OUTSIDE padded box */}
-//       <motion.div
-//         initial={{ y: -50, opacity: 0 }}
-//         animate={{ y: 0, opacity: 1 }}
-//         transition={{ duration: 0.6, ease: "easeOut" }}
-//         className="sticky top-0 z-50 w-full border-b bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white shadow backdrop-blur"
-//       >
-//         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-//           {/* Left Section */}
-//           <div>
-//             <h1 className="text-xl font-bold tracking-tight">🚀 Checklift</h1>
-//             <p className="text-sm opacity-90">Uptime & Broken Link Monitoring</p>
-//           </div>
-
-//           {/* Right Section */}
-//           <div className="flex items-center gap-4">
-//             <UpgradeToPro />
-//             <UserButton afterSignOutUrl="/sign-in" />
-//           </div>
-//         </div>
-//       </motion.div>
-
-//       {/* Main Dashboard Container */}
-//       <div className="p-6 max-w-5xl mx-auto space-y-6">
-//         {/* Add URL Section */}
-//         <div className="rounded-xl border bg-card p-6 shadow-sm space-y-4">
-//           <h2 className="text-lg font-semibold">Add a URL to Monitor</h2>
-//           <input
-//             className="w-full border border-input bg-background rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-//             value={input}
-//             onChange={e => setInput(e.target.value)}
-//             placeholder="https://example.com"
-//           />
-//           <button
-//             className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-md disabled:opacity-50"
-//             onClick={addUrl}
-//             disabled={!input.trim()}
-//           >
-//             Add URL
-//           </button>
-//         </div>
-
-//         {/* URL List */}
-//         <div className="rounded-xl border bg-card p-6 shadow-sm">
-//           <h2 className="text-lg font-semibold mb-4">Monitored URLs</h2>
-//           {urls.length === 0 ? (
-//             <p className="text-muted-foreground text-sm">No URLs added yet.</p>
-//           ) : (
-//             <ul className="space-y-3">
-//               {urls.map(site => (
-//                 <li
-//                   key={site._id}
-//                   className="flex justify-between items-center border border-border p-3 rounded-md bg-muted/20"
-//                 >
-//                   <span className="text-sm">{site.url}</span>
-//                   <button
-//                     onClick={() => deleteUrl(site._id)}
-//                     className="text-red-500 text-sm hover:underline"
-//                   >
-//                     Delete
-//                   </button>
-//                 </li>
-//               ))}
-//             </ul>
-//           )}
-//         </div>
-
-//         {/* Logs */}
-//         <div className="rounded-xl border bg-card p-6 shadow-sm">
-//           <LogList />
-//         </div>
-//       </div>
-//     </div>
 
  <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-purple-100">
       {/* Navbar */}

@@ -1,73 +1,9 @@
-// import { useAuth } from '@clerk/clerk-react';
-// import axios from 'axios';
-
-// const plans = [
-//   {
-//     name: 'Free',
-//     price: '$0/mo',
-//     features: ['3 URLs', '5-min checks'],
-//     priceId: null
-//   },
-//   {
-//     name: 'Pro',
-//     price: '$9/mo',
-//     features: ['20 URLs', '1-min checks', 'email alerts'],
-//     priceId: import.meta.env.VITE_PRO_PRICE_ID // Replace with real Stripe Price ID
-//   },
-//   {
-//     name: 'Agency',
-//     price: '$29/mo',
-//     features: ['100 URLs', 'branding', 'SSL/domain alerts'],
-//     priceId: import.meta.env.VITE_AGENCY_PRICE_ID // Replace with real Stripe Price ID
-//   }
-// ];
-
-// export default function PlanSelector() {
-//   const { getToken } = useAuth();
-
-//   const subscribe = async (priceId) => {
-//     const token = await getToken();
-//     const res = await axios.post('http://localhost:4000/api/create-checkout-session', {
-//       priceId
-//     }, {
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       }
-//     });
-
-//     window.location.href = res.data.url;
-//   };
-
-//   return (
-//     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-//       {plans.map(plan => (
-//         <div key={plan.name} className="border p-6 rounded-lg text-center">
-//           <h2 className="text-xl font-bold">{plan.name}</h2>
-//           <p className="text-lg">{plan.price}</p>
-//           <ul className="mt-2 mb-4 text-sm">
-//             {plan.features.map(f => <li key={f}>• {f}</li>)}
-//           </ul>
-//           {plan.priceId ? (
-//             <button
-//               onClick={() => subscribe(plan.priceId)}
-//               className="bg-blue-600 text-white px-4 py-2 rounded"
-//             >
-//               Subscribe
-//             </button>
-//           ) : (
-//             <p className="text-gray-500">Current Plan</p>
-//           )}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
-
-
 import { useAuth } from '@clerk/clerk-react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const plans = [
   {
@@ -95,7 +31,7 @@ export default function PlanSelector() {
 
   const subscribe = async (priceId) => {
     const token = await getToken();
-    const res = await axios.post('http://localhost:4000/api/create-checkout-session', {
+    const res = await axios.post(`${API_URL}/api/create-checkout-session`, {
       priceId
     }, {
       headers: {
