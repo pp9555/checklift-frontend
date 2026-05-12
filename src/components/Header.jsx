@@ -97,7 +97,7 @@ export default function Header() {
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
               <span className="bg-gradient-to-r from-rose-500 to-rose-700 bg-clip-text text-xl font-bold text-transparent">
-                Acme Inc.
+                Checklist Inc.
               </span>
             </Link>
           </motion.div>
